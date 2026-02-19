@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIGER METHOD - Fat Loss Blueprint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        p {
+            color: #ccc;
+        }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .section {
+            margin-bottom: 60px;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+        /* Cards */
+        .card {
+            background-color: #111;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin: 15px 0;
+        }
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #FFD700;
+        }
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: #FFD700;
+            border-radius: 50%;
+        }
+        .timeline-item h4 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        /* Testimonials */
+        .testimonials {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .testimonial {
+            background-color: #111;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+            text-align: center;
+        }
+        .testimonial img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .stars {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        /* Reviews Slider */
+        .reviews-slider {
+            overflow: hidden;
+            position: relative;
+        }
+        .reviews {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+        .review {
+            min-width: 300px;
+            background-color: #111;
+            border-radius: 20px;
+            padding: 20px;
+            margin-right: 20px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        /* FAQ */
+        .faq-item {
+            background-color: #111;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: left;
+            width: 100%;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+            color: #ccc;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-bottom: 20px;
+        }
+        /* Guarantee */
+        .guarantee {
+            border: 2px solid #FFD700;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            background-color: #111;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+        }
+        /* Plans */
+        .plans {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .plans.show {
+            display: block;
+            opacity: 1;
+        }
+        .plan {
+            background-color: #111;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+            color: #ccc;
+        }
+        /* Responsive */
+        @media (min-width: 768px) {
+            .testimonials {
+                flex-direction: row;
+            }
+            .testimonial {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HERO SECTION -->
+        <section class="hero section fade-in">
+            <h1 style="font-size: 3rem; color: #FFD700; text-align: center;">TIGER METHOD</h1>
+            <p style="font-size: 1.2rem; text-align: center; margin: 20px 0;">The Step-by-Step Fat Loss Blueprint That Transformed 1000+ Lives 🦁</p>
+            <p style="font-size: 0.9rem; color: #FFD700; text-align: center;">Trusted by 55,000+ on Instagram</p>
+        </section>
+
+        <!-- SECTION 1 – PRODUCT CARDS -->
+        <section class="product-cards section">
+            <div class="card">
+                <h3>TIGER METHOD (🇮🇳 For Indians)</h3>
+                <p>Customized for Indian Diet & Lifestyle</p>
+                <div class="price">₹199</div>
+                <button class="btn india-btn">DOWNLOAD NOW</button>
+            </div>
+            <div class="card">
+                <h3>TIGER METHOD (🌍 Global)</h3>
+                <p>Proven System Used Internationally</p>
+                <div class="price">$8</div>
+                <button class="btn global-btn">DOWNLOAD NOW</button>
+            </div>
+        </section>
+
+        <!-- SECTION 2 – WHAT YOU GET -->
+        <section class="what-you-get section reveal">
+            <h2 style="color: #FFD700; text-align: center; margin-bottom: 30px;">What You Get</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 15px;"><span style="color: #FFD700; font-size: 1.2rem;">✔</span> 90 Day Structured Fat Loss Plan</li>
+                <li style="margin-bottom: 15px;"><span style="color: #FFD700; font-size: 1.2rem;">✔</span> Vegetarian Diet Blueprint</li>
+                <li style="margin-bottom: 15px;"><span style="color: #FFD700; font-size: 1.2rem;">✔</span> Daily Workout Routine</li>
+                <li style="margin-bottom: 15px;"><span style="color: #FFD700; font-size: 1.2rem;">✔</span> Weekly Progress Tracker</li>
+                <li style="margin-bottom: 15px;"><span style="color: #FFD700; font-size: 1.2rem;">✔</span> Grocery List Guide</li>
+                <li style="margin-bottom: 15px;"><span style="color: #FFD700; font-size: 1.2rem;">✔</span> Fat Loss Psychology Guide</li>
+                <li style="margin-bottom: 15px;"><span style="color: #FFD700; font-size: 1.2rem;">✔</span> Bonus Habit System</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 3 – 3 MONTH STRUCTURE -->
+        <section class="structure section reveal">
+            <h2 style="color: #FFD700; text-align: center; margin-bottom: 30px;">3 Month Structure</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Month 1 – Foundation Reset</h4>
+                    <ul>
+                        <li>• Metabolism Reset</li>
+                        <li>• Basic Fat Burn Workouts</li>
+                        <li>• Clean Diet Structure</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h4>Month 2 – Acceleration Phase</h4>
+                    <ul>
+                        <li>• Strength Upgrade</li>
+                        <li>• Cardio Boost</li>
+                        <li>• Fat Burning System</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h4>Month 3 – Lean Transformation</h4>
+                    <ul>
+                        <li>• Advanced Strategy</li>
+                        <li>• Plateau Break Method</li>
+                        <li>• Final Body Tightening Plan</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 – TRANSFORMATION PROOF -->
+        <section class="transformation section reveal">
+            <h2 style="color: #FFD700; text-align: center; margin-bottom: 30px;">Transformation Proof</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/100x100/FFD700/000?text=Before/After" alt="Transformation">
+                    <div class="stars">★★★★★</div>
+                    <p>"Lost 20kg in 3 months! This method changed my life." - Rajesh 🇮🇳</p>
+                </div>
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/100x100/FFD700/000?text=Before/After" alt="Transformation">
+                    <div class="stars">★★★★★</div>
+                    <p>"Gained muscle and confidence. Highly recommend!" - Sarah 🇺🇸</p>
+                </div>
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/100x100/FFD700/000?text=Before/After" alt="Transformation">
+                    <div class="stars">★★★★★</div>
+                    <p>"Simple and effective. Results speak for themselves." - Ahmed 🇦🇪</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5 – REVIEWS SECTION -->
+        <section class="reviews-section section reveal">
+            <h2 style="color: #FFD700; text-align: center; margin-bottom: 30px;">What People Say</h2>
+            <div class="reviews-slider">
+                <div class="reviews">
+                    <div class="review"><p>"Amazing guide! Lost weight effortlessly." - User1</p></div>
+                    <div class="review"><p>"Best investment for my health." - User2</p></div>
+                    <div class="review"><p>"Easy to follow, great results." - User3</p></div>
+                    <div class="review"><p>"Transformed my body in 90 days." - User4</p></div>
+                    <div class="review"><p>"Highly effective system." - User5</p></div>
+                    <div class="review"><p>"Worth every penny." - User6</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6 – FAQ SECTION -->
+        <section class="faq section reveal">
+            <h2 style="color: #FFD700; text-align: center; margin-bottom: 30px;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <button class="faq-question">1. Is this beginner friendly?</button>
+                <div class="faq-answer"><p>Yes, it's designed for all levels, including beginners.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">2. Is vegetarian diet included?</button>
+                <div class="faq-answer"><p>Absolutely, with a dedicated vegetarian blueprint.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">3. How do I access after payment?</button>
+                <div class="faq-answer"><p>You'll receive instant access via email.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">4. How long does it take to see results?</button>
+                <div class="faq-answer"><p>Most see changes in 4-6 weeks with consistency.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">5. Do I need gym equipment?</button>
+                <div class="faq-answer"><p>No, bodyweight exercises are included.</p></div>
+            </div>
+        </section>
+
+        <!-- SECTION 7 – GUARANTEE BOX -->
+        <section class="guarantee section reveal">
+            <h3 style="color: #FFD700;">7 Day Satisfaction Guarantee</h3>
+            <p>If not satisfied, contact support for a full refund.</p>
+        </section>
+
+        <!-- SECTION 8 – INDIA PLANS -->
+        <section id="india-plans" class="plans section">
+            <h2 style="color: #FFD700; text-align: center; margin-bottom: 30px;">India Plans</h2>
+            <div class="plan">
+                <h3>Weight Loss Plan</h3>
+                <div class="price">₹199</div>
+                <button class="btn" onclick="window.location.href='weightloss-india.html'">Pay with Razorpay (Placeholder)</button>
+            </div>
+            <div class="plan">
+                <h3>Weight Gain Plan</h3>
+                <div class="price">₹199</div>
+                <button class="btn" onclick="window.location.href='weightgain-india.html'">Pay with Razorpay (Placeholder)</button>
+            </div>
+        </section>
+
+        <!-- SECTION 9 – GLOBAL PLANS -->
+        <section id="global-plans" class="plans section">
+            <h2 style="color: #FFD700; text-align: center; margin-bottom: 30px;">Global Plans</h2>
+            <div class="plan">
+                <h3>Weight Loss Plan</h3>
+                <div class="price">$8</div>
+                <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/9HPF8NR46MZHG','_blank')"> Pay with PayPal </button>
+            
+            <div class="plan">
+                <h3>Weight Gain Plan</h3>
+                <div class="price">$8</div>
+                <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/9HPF8NR46MZHG','_blank')"> Pay with PayPal </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Contact: chandramohan700733@gmail.com</p>
+        <p>Disclaimer: Results may vary. Consult a doctor before starting.</p>
+        <p>&copy; 2023 TIGER METHOD. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Reveal animations on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        reveals.forEach(reveal => observer.observe(reveal));
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Show plans on button click
+        document.querySelector('.india-btn').addEventListener('click', () => {
+            document.getElementById('india-plans').classList.add('show');
+            document.getElementById('global-plans').classList.remove('show');
+            document.getElementById('india-plans').scrollIntoView({ behavior: 'smooth' });
+        });
+        document.querySelector('.global-btn').addEventListener('click', () => {
+            document.getElementById('global-plans').classList.add('show');
+            document.getElementById('india-plans').classList.remove('show');
+            document.getElementById('global-plans').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
